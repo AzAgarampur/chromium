@@ -1,0 +1,53 @@
+// Copyright 2024 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// https://github.com/WICG/writing-assistance-apis
+
+[
+  Exposed=(Window,Worker),
+  RuntimeEnabled=AISummarizationAPI,
+  SecureContext
+]
+interface AISummarizerCapabilities {
+  readonly attribute AICapabilityAvailability available;
+
+  AICapabilityAvailability supportsType(AISummarizerType type);
+  AICapabilityAvailability supportsFormat(AISummarizerFormat format);
+  AICapabilityAvailability supportsLength(AISummarizerLength length);
+
+  AICapabilityAvailability languageAvailable(DOMString languageTag);
+};
+
+enum AISummarizerType { "tl;dr", "key-points", "teaser", "headline" };
+enum AISummarizerFormat { "plain-text", "markdown" };
+enum AISummarizerLength { "short", "medium", "long" };
+
+dictionary AISummarizerCreateOptions {
+  AbortSignal signal;
+  AICreateMonitorCallback monitor;
+  DOMString sharedContext;
+  AISummarizerType type = "key-points";
+  AISummarizerFormat format = "markdown";
+  AISummarizerLength length = "medium";
+};
+
+[
+  Exposed=(Window,Worker),
+  RuntimeEnabled=AISummarizationAPI,
+  SecureContext
+]
+interface AISummarizerFactory {
+  [
+    Measure,
+    CallWith=ScriptState,
+    RaisesException
+  ]
+  Promise<AISummarizer> create(optional AISummarizerCreateOptions options = {});
+  [
+    Measure,
+    CallWith=ScriptState,
+    RaisesException
+  ]
+  Promise<AISummarizerCapabilities> capabilities();
+};

@@ -1,0 +1,11 @@
+
+¢
+3release/auxiliary_metadata/auxiliary_metadata.protoauxiliary_metadata"o
+Usage
+cpu_peak (RcpuPeak
+cpu_avg (RcpuAvg
+mem_peak (RmemPeak
+mem_avg (RmemAvg"^
+AuxiliaryMetadata
+pool (	Rpool/
+usage (2.auxiliary_metadata.UsageRusageJbproto3

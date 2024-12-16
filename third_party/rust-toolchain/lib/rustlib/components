@@ -1,0 +1,7 @@
+rust-std-x86_64-pc-windows-msvc
+rustc
+cargo
+rust-analyzer-preview
+rustfmt-preview
+clippy-preview
+rust-src

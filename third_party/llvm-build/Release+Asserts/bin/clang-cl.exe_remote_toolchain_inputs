@@ -1,0 +1,7 @@
+..\lib\clang\20\lib\windows\clang_rt.profile-aarch64.lib
+..\lib\clang\20\lib\windows\clang_rt.profile-i386.lib
+..\lib\clang\20\lib\windows\clang_rt.profile-x86_64.lib
+..\lib\clang\20\lib\windows\clang_rt.ubsan_standalone-x86_64.lib
+..\lib\clang\20\lib\windows\clang_rt.ubsan_standalone_cxx-x86_64.lib
+..\lib\clang\20\share\asan_ignorelist.txt
+..\lib\clang\20\share\cfi_ignorelist.txt

@@ -1,0 +1,81 @@
+# Copyright 2024 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+source_set("glic") {
+  sources = [
+    "glic_focused_tab_manager.h",
+    "glic_keyed_service.h",
+    "glic_keyed_service_factory.h",
+    "glic_page_context_fetcher.h",
+    "glic_profile_manager.h",
+    "glic_window_controller.h",
+    "guest_util.h",
+  ]
+  public_deps = [
+    "//base",
+    "//chrome/browser/content_extraction:content_extraction",
+    "//chrome/browser/profiles:profile",
+    "//chrome/browser/ui:browser_list",
+    "//chrome/browser/ui/tabs:tab_strip_model_observer",
+    "//chrome/browser/ui/webui/glic:mojo_bindings",
+    "//content/public/browser",
+    "//ui/views:views",
+  ]
+}
+
+source_set("impl") {
+  sources = [
+    "glic_focused_tab_manager.cc",
+    "glic_keyed_service.cc",
+    "glic_keyed_service_factory.cc",
+    "glic_page_context_fetcher.cc",
+    "glic_profile_manager.cc",
+    "glic_window_controller.cc",
+    "guest_util.cc",
+  ]
+  public_deps = [
+    "//chrome/browser:browser_public_dependencies",
+    "//chrome/browser/ui:ui",
+  ]
+  deps = [
+    ":glic",
+    "//chrome/browser:browser_process",
+    "//chrome/browser:global_features",
+    "//chrome/browser/ui:browser_list",
+    "//chrome/browser/ui:browser_navigator_params_headers",
+    "//chrome/common",
+    "//components/guest_view/browser",
+    "//components/sessions",
+    "//url",
+  ]
+}
+
+source_set("enabling") {
+  sources = [
+    "glic_enabling.cc",
+    "glic_enabling.h",
+  ]
+  public_deps = [
+    "//base",
+    "//chrome/common:chrome_features",
+  ]
+}
+
+source_set("unit_tests") {
+  testonly = true
+  sources = [
+    "glic_enabling_unittest.cc",
+    "glic_profile_manager_unittest.cc",
+  ]
+  deps = [
+    ":enabling",
+    ":glic",
+    "//base/test:test_support",
+    "//chrome/browser/ui",
+    "//chrome/common:chrome_features",
+    "//chrome/test:test_support",
+    "//testing/gmock",
+    "//testing/gtest",
+  ]
+}

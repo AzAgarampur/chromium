@@ -1,0 +1,63 @@
+# Copyright 2024 The Chromium Authors
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//build/config/chromeos/ui_mode.gni")
+
+assert(is_chromeos_ash)
+
+source_set("browser_tests") {
+  testonly = true
+  defines = [ "HAS_OUT_OF_PROC_TEST_RUNNER" ]
+  sources = [
+    "kiosk_browsertest.cc",
+    "kiosk_file_system_volumes_browsertest.cc",
+    "kiosk_web_app_offline_enabled_browsertest.cc",
+    "new_windows_in_kiosk_allowed_browsertest.cc",
+    "splash_screen_browsertest.cc",
+    "virtual_keyboard_features_browsertest.cc",
+  ]
+  deps = [
+    ":test_support",
+    "//chrome/browser",
+    "//chrome/browser/ash/app_mode/web_app",
+    "//chrome/browser/ash/login/app_mode/test:test_support",
+    "//chrome/browser/chromeos/app_mode",
+    "//chrome/test:test_support",
+    "//chrome/test:test_support_ui",
+    "//content/test:test_support",
+    "//testing/gtest",
+    "//ui/events:test_support",
+  ]
+}
+
+static_library("test_support") {
+  testonly = true
+
+  sources = [
+    "kiosk_mixin.cc",
+    "kiosk_mixin.h",
+    "kiosk_session_initialized_waiter.cc",
+    "kiosk_session_initialized_waiter.h",
+    "kiosk_test_utils.cc",
+    "kiosk_test_utils.h",
+    "network_state_mixin.cc",
+    "network_state_mixin.h",
+    "scoped_device_settings.cc",
+    "scoped_device_settings.h",
+  ]
+
+  deps = [
+    "//apps:test_support",
+    "//chrome/browser",
+    "//chrome/browser/app_mode/test:test_support",
+    "//chrome/browser/ash/app_mode:test_support",
+    "//chrome/browser/ash/app_mode/web_app",
+    "//chrome/browser/ash/login/test:test_support",
+    "//chrome/browser/ash/ownership",
+    "//chrome/browser/ash/settings:test_support",
+    "//chrome/browser/chromeos/app_mode",
+    "//chrome/test:test_support_ui",
+    "//chromeos/ash/components/network:test_support",
+  ]
+}
